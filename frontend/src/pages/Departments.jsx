@@ -1,16 +1,15 @@
+import React from "react";
+import { motion } from "framer-motion";
 import {
   Bone,
   Calendar,
   GitGraph,
-  Heading5Icon,
-  Heart,
-  Search,
   Stethoscope,
   Syringe,
   Thermometer,
   User,
+  Search,
 } from "lucide-react";
-import React from "react";
 import {
   Card,
   CardDescription,
@@ -27,123 +26,169 @@ function Departments() {
       title: "Pediatrics",
       description:
         "Specialized medical care for infants, children, and adolescents",
-      services: ["Well-child visits", "Immunization", "Growth moitoring"],
+      services: ["Well-child visits", "Immunization", "Growth monitoring"],
     },
     {
       icon: Stethoscope,
-      title: "Pediatrics",
+      title: "General Medicine",
       description:
-        "Specialized medical care for infants, children, and adolescents",
-      services: ["Well-child visits", "Immunization", "Growth moitoring"],
+        "Comprehensive primary care for adults with acute and chronic conditions",
+      services: [
+        "Physical exams",
+        "Chronic disease management",
+        "Health counseling",
+      ],
     },
     {
       icon: Bone,
-      title: "Pediatrics",
+      title: "Orthopedics",
       description:
-        "Specialized medical care for infants, children, and adolescents",
-      services: ["Well-child visits", "Immunization", "Growth moitoring"],
+        "Diagnosis and treatment of bone, joint, and musculoskeletal disorders",
+      services: ["Fracture treatment", "Joint replacement", "Arthroscopy"],
     },
     {
       icon: GitGraph,
-      title: "Pediatrics",
-      description:
-        "Specialized medical care for infants, children, and adolescents",
-      services: ["Well-child visits", "Immunization", "Growth moitoring"],
+      title: "Neurology",
+      description: "Advanced care for brain, nerve, and spinal cord conditions",
+      services: [
+        "Stroke care",
+        "Epilepsy management",
+        "Neurodiagnostic testing",
+      ],
     },
     {
       icon: Syringe,
-      title: "Pediatrics",
+      title: "Immunology",
       description:
-        "Specialized medical care for infants, children, and adolescents",
-      services: ["Well-child visits", "Immunization", "Growth moitoring"],
+        "Diagnosis and treatment of immune system disorders and allergies",
+      services: ["Allergy testing", "Immunotherapy", "Autoimmune disease care"],
     },
     {
       icon: Thermometer,
-      title: "Pediatrics",
+      title: "Internal Medicine",
       description:
-        "Specialized medical care for infants, children, and adolescents",
-      services: ["Well-child visits", "Immunization", "Growth moitoring"],
+        "Specialized care focusing on adult health and complex medical conditions",
+      services: [
+        "Fever management",
+        "Infection treatment",
+        "Preventive health screenings",
+      ],
     },
   ];
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
     <div>
-      {/*Hero*/}
-      <section className="bg-blue-800 p-8">
-        <div className="flex flex-col items-center justify-center text-center p-6 mt-4">
-          <h2 className="text-4xl font-bold text-white">
+      {/* Hero Section */}
+      <section className="p-10 text-center bg-blue-800">
+        <motion.div
+          initial={{ opacity: 0, y: -40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-5xl font-bold leading-tight text-white">
             Our Specialized <br />
-            <span className="text-blue-100">Medical Departments</span>
+            <span className="text-blue-200">Medical Departments</span>
           </h2>
-          <p className="text-gray-200 max-w-4xl my-4 text-md md:text-2xl sm:text-2xl">
-            Discover our wide range of medical departments, each staffed with
-            expert physicians and equipped with advanced technologyto provide
-            you the bast care
+          <p className="max-w-3xl mx-auto mt-4 text-lg text-blue-100 md:text-xl">
+            Discover a wide range of medical departments staffed with expert
+            physicians and advanced technology.
           </p>
-        </div>
+        </motion.div>
       </section>
-      <section className="relative w-3/4 lg:w-1/2 md:w-1/2 mt-6 items-center justify-center">
+
+      {/* Search Bar */}
+      <section className="relative w-3/4 mx-auto mt-10 md:w-1/2 lg:w-1/3">
+        <Search className="absolute text-gray-400 -translate-y-1/2 left-5 top-1/2" />
         <input
           type="search"
-          placeholder="search for a department (e.g cardiology, pediatics..."
-          className="text-zinc-600 w-full py-1 pl-10 pr-4 m-3 rounded-xl cursor-text border-2 border-gray-500 outline-none transition-all duration-200"
+          placeholder="Search for a department..."
+          className="w-full py-3 pl-12 pr-4 text-gray-700 transition border-2 border-gray-300 shadow-sm outline-none rounded-2xl focus:ring-2 focus:ring-blue-500"
         />
-        <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400 inline" />
       </section>
-      <section>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4 mx-3 items-center justify-between">
-          {departments.map((department, index) => (
-            <Card key={index} className="max-w-sm shadow-lg">
-              <department.icon
-                size={60}
-                className="bg-blue-600 mx-auto text-white rounded-lg p-1 mt-6"
-              />
-              <CardContents className="px-2 py-4">
-                <CardTitle>{department.title}</CardTitle>
-                <CardDescription>{department.description}</CardDescription>
-                <ul className="space-y-1">
-                  {department.services.map((service, idx) => (
-                    <li key={idx} className="flex text-gray-600">
-                      <div className="bg-blue-700 h-2 w-2 my-2 rounded-full mr-2" />
-                      {service}
-                    </li>
-                  ))}
-                </ul>
-              </CardContents>
-              <div className="items-center justify center text-center p-3">
-                <Link to="/book-appointment">
-                  <Button
-                    className="items-center justify-center hover:bg-blue-500 hover:text-gray-100"
-                    sx={{ backgroundColor: "blue", color: "white" }}
-                  >
-                    <Calendar className="inline-block ml-2" />
-                    Book Appointment
-                  </Button>
-                </Link>
-              </div>
-            </Card>
+
+      {/* Departments Grid */}
+      <section className="p-6">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {departments.map((dept, index) => (
+            <motion.div
+              key={index}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+            >
+              <Card className="max-w-sm transition shadow-xl cursor-pointer rounded-2xl hover:shadow-2xl">
+                <dept.icon
+                  size={60}
+                  className="p-3 mx-auto mt-6 text-white bg-blue-600 shadow-md rounded-2xl"
+                />
+                <CardContents className="px-4 py-6">
+                  <CardTitle className="text-2xl font-semibold">
+                    {dept.title}
+                  </CardTitle>
+                  <CardDescription className="mb-4 text-gray-600 text-md">
+                    {dept.description}
+                  </CardDescription>
+                  <ul className="space-y-2">
+                    {dept.services.map((service, i) => (
+                      <li key={i} className="flex items-center text-gray-700">
+                        <div className="w-2 h-2 mr-3 bg-blue-600 rounded-full"></div>
+                        {service}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContents>
+                <div className="p-4 text-center">
+                  <Link to="/book-appointment">
+                    <Button className="px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-xl">
+                      <Calendar className="inline-block mr-2" />
+                      Book Appointment
+                    </Button>
+                  </Link>
+                </div>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </section>
-      <section className="flex flex-row bg-blue-700 p-8 m-8 rounded-md gap-3">
-        <div className="p-4 sm:w-3/4 md:w-full">
-          <h2 className="text-white font-bold py-2 sm:text-3xl md:text-2xl">
+
+      {/* CTA Section */}
+      <section className="flex flex-col items-center gap-6 p-10 m-8 bg-blue-700 md:flex-row rounded-2xl">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="md:w-2/3"
+        >
+          <h2 className="mb-3 text-3xl font-bold text-white">
             Find the Right Specialist for You
           </h2>
-          <p className="text-blue-100 mb-2 text-md md:text-xl sm:text-2xl">
-            Our team of expert doctors across all departments is here to provide
-            you with personalized and effective care. Find a doctor and book
-            your consultation today.
+          <p className="mb-4 text-lg text-blue-100">
+            Our expert doctors across all departments are ready to provide
+            personalized and effective care.
           </p>
           <Button
-            sx={{ backgroundColor: "white", color: "blue" }}
-            className="my-3"
+            sx={{ backgroundColor: "white" }}
+            className="px-6 py-3 font-semibold text-blue-700 bg-white rounded-xl hover:bg-gray-200"
           >
             Find a Doctor
           </Button>
-        </div>
-        <div className="hidden lg:flex md:flex items-center justify-center p-16">
-          <Stethoscope size={80} className="text-blue-400" />
-        </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="justify-center hidden w-1/3 md:flex"
+        >
+          <Stethoscope size={90} className="text-blue-300" />
+        </motion.div>
       </section>
     </div>
   );
